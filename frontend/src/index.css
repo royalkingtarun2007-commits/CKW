@@ -1,0 +1,206 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================= */
+/* 🌌 EXTREME GLOBAL NEBULA ENGINE — FINAL VERSION               */
+/* Optimized for full-site usage (Login + Dashboard + More)     */
+/* ============================================================= */
+
+/* ROOT SPACE BACKGROUND */
+.space-root {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 40%, #110005, #060009 70%, #000);
+  z-index: -1;
+}
+
+/* ============================================================= */
+/* 🔥 3-LAYER PARALLAX NEBULA SYSTEM                           */
+/* ============================================================= */
+
+.nebula-layer {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  left: -50%;
+  top: -50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mix-blend-mode: screen;
+  filter: blur(90px) saturate(220%);
+  opacity: 0.85;
+  will-change: transform;
+  animation: nebulaFloat var(--speed) linear infinite;
+}
+
+.nebula-red {
+  background-image: radial-gradient(circle at 40% 40%, rgba(255,60,60,0.7), transparent 75%);
+  --speed: 90s;
+}
+.nebula-crimson {
+  background-image: radial-gradient(circle at 70% 60%, rgba(200,20,20,0.6), transparent 75%);
+  --speed: 120s;
+}
+.nebula-blood {
+  background-image: radial-gradient(circle at 30% 80%, rgba(255,30,30,0.5), transparent 75%);
+  --speed: 160s;
+}
+
+@keyframes nebulaFloat {
+  0% { transform: translate(0,0) scale(1); }
+  50% { transform: translate(3%, -4%) scale(1.05); }
+  100% { transform: translate(0,0) scale(1); }
+}
+
+/* ============================================================= */
+/* ☁️ VOLUMETRIC SPACE FOG                                     */
+/* ============================================================= */
+
+.space-fog {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255,100,100,0.10), transparent 70%),
+              radial-gradient(circle at 20% 70%, rgba(255,70,70,0.07), transparent 75%);
+  filter: blur(50px);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  animation: fogPulse 14s ease-in-out infinite;
+}
+
+@keyframes fogPulse {
+  0% { opacity: 0.7; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* ============================================================= */
+/* ✨ STARFIELD SYSTEM (Twinkling Cinematic Stars)               */
+/* ============================================================= */
+
+.star {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  width: var(--s);
+  height: var(--s);
+  filter: drop-shadow(0 0 6px rgba(255,80,80,0.7));
+  animation: starBlink var(--speed) infinite ease-in-out;
+}
+
+@keyframes starBlink {
+  0% { opacity: 0.7; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.8); }
+  100% { opacity: 0.8; transform: scale(1); }
+}
+
+/* ============================================================= */
+/* 🌠 CINEMATIC COMET ENGINE (RGB, Volumetric Tail)              */
+/* ============================================================= */
+
+.comet {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(circle, #fff, rgba(255,120,120,0.8));
+  filter: blur(0.7px);
+  will-change: transform, opacity;
+  animation: cometTravel var(--duration) linear forwards;
+  transform-origin: center;
+}
+
+.comet::before {
+  content: "";
+  position: absolute;
+  width: 220px;
+  height: 12px;
+  left: calc(-220px + var(--size));
+  top: 50%;
+  transform: translateY(-50%) rotate(var(--angle));
+  border-radius: 50%;
+  background: linear-gradient(90deg,
+    rgba(var(--r), var(--g), var(--b), 1) 0%,
+    rgba(var(--r), var(--g), var(--b), 0.6) 40%,
+    rgba(var(--r), var(--g), var(--b), 0));
+  filter: blur(12px);
+  opacity: 1;
+}
+
+@keyframes cometTravel {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(var(--angle));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy)) rotate(var(--angle));
+  }
+}
+
+/* ============================================================= */
+/* ⚡ WARP FLASH (Used on Login Submit)                           */
+/* ============================================================= */
+
+.warp-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(1);
+  background: radial-gradient(circle, rgba(255,120,120,0.15), transparent 60%);
+  transition: opacity 350ms ease, transform 350ms ease;
+}
+
+.warp-active {
+  opacity: 1;
+  transform: scale(1.25);
+  backdrop-filter: blur(3px);
+  animation: warpFlash 600ms ease-out forwards;
+}
+
+@keyframes warpFlash {
+  0% { opacity: 0; filter: brightness(1); }
+  50% { opacity: 1; filter: brightness(1.4); }
+  100% { opacity: 0; filter: brightness(1); }
+}
+
+/* ============================================================= */
+/* 🟥 CARD + UI ANIMATIONS                                       */
+/* ============================================================= */
+
+@keyframes cardIn {
+  0% { opacity: 0; transform: translateY(40px) scale(0.94); filter: blur(6px); }
+  100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+.animate-cardIn {
+  animation: cardIn 900ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+@keyframes glowPulse {
+  0% { filter: drop-shadow(0 0 0 rgba(255,40,40,0)); }
+  50% { filter: drop-shadow(0 0 22px rgba(255,20,20,0.55)); }
+  100% { filter: drop-shadow(0 0 0 rgba(255,40,40,0)); }
+}
+.animate-glow {
+  animation: glowPulse 3.2s infinite ease-in-out;
+}
+
+/* ============================================================= */
+/* 🦾 REDUCED MOTION SUPPORT                                     */
+/* ============================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .nebula-layer,
+  .star,
+  .comet,
+  .space-fog {
+    animation: none !important;
+  }
+}
+
