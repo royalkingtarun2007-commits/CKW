@@ -9,21 +9,26 @@ dotenv.config();
 const app: Application = express();
 const PORT = process.env.PORT || 4000;
 
+// Allowed frontend origins (local + Render)
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL || ""   // Render frontend URL from env
+];
+
 // Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
-app.use(express.json());
 
+app.use(express.json());
 
 app.use((req, _res, next) => {
   console.log("➡️", req.method, req.url);
   next();
 });
-
 
 // Root route
 app.get("/", (req: Request, res: Response) => {
