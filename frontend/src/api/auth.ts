@@ -1,7 +1,7 @@
 // src/api/auth.ts
 import axios from "axios";
 
-const API_URL = "http://localhost:4000/api/auth";
+const API_URL = "https://ckw-backend.onrender.com/";
 
 // REGISTER
 export const registerUser = (name: string, email: string, password: string) => {
